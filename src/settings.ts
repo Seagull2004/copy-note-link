@@ -1,5 +1,5 @@
 import {App, PluginSettingTab, Setting} from "obsidian";
-import MyPlugin from "./main";
+import CopyNoteLinkPlugin from "./main";
 
 export interface MyPluginSettings {
 	previewPreference: boolean;
@@ -12,9 +12,9 @@ export const DEFAULT_SETTINGS: MyPluginSettings = {
 }
 
 export class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+	plugin: CopyNoteLinkPlugin;
 
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: CopyNoteLinkPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}

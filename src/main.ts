@@ -9,19 +9,29 @@ export default class MyPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		// This adds a simple command that can be triggered anywhere
+		// This adds a simple command that can be triggered anywhere 
 		this.addCommand({
 			id: 'copy-current-file-link',
 			name: 'Copy current file link',
-			callback: () => {
-				new Notice("ciao")
+			hotkeys: [{ modifiers: ['Mod', 'Shift'], key: 'c' }],
+			callback: async () => {
+				const filePath = this.app.workspace.getActiveFile()?.basename
+				let output = "[[" + filePath
+				if (this.settings.previewPreference){
+					output = "!" + output
+				}
+				if (this.settings.headingSupport) {
+					output += "#"
+				} else {
+					output += "]]"
+				}
+				await navigator.clipboard.writeText(output)
+				new Notice("📒 copied: " + output);
 			}
 		});
-		
 	
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new SampleSettingTab(this.app, this));
-
 	}
 
 	onunload() {
@@ -33,21 +43,5 @@ export default class MyPlugin extends Plugin {
 
 	async saveSettings() {
 		await this.saveData(this.settings);
-	}
-}
-
-class SampleModal extends Modal {
-	constructor(app: App) {
-		super(app);
-	}
-
-	onOpen() {
-		let {contentEl} = this;
-		contentEl.setText('Woah!');
-	}
-
-	onClose() {
-		const {contentEl} = this;
-		contentEl.empty();
 	}
 }

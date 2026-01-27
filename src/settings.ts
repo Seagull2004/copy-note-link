@@ -2,11 +2,13 @@ import {App, PluginSettingTab, Setting} from "obsidian";
 import MyPlugin from "./main";
 
 export interface MyPluginSettings {
-	mySetting: string;
+	previewPreference: boolean;
+	headingSupport: boolean;
 }
 
 export const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
+	previewPreference: false,
+	headingSupport: true
 }
 
 export class SampleSettingTab extends PluginSettingTab {
@@ -23,14 +25,25 @@ export class SampleSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Settings #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue(this.plugin.settings.mySetting)
+			.setName('Link with preview')
+			.setDesc('Choose if you want or not the \'!\' in the clipboard link')
+			.addToggle( choise => choise
+				.setValue(this.plugin.settings.previewPreference)
 				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
+					this.plugin.settings.previewPreference = value;
 					await this.plugin.saveSettings();
-				}));
+				})
+			)
+
+		new Setting(containerEl)
+			.setName('Link with heading support')
+			.setDesc('Disable this if you want no \'#\' in the end of a link')
+			.addToggle( choise => choise
+				.setValue(this.plugin.settings.headingSupport)
+				.onChange(async (value) => {
+					this.plugin.settings.headingSupport = value;
+					await this.plugin.saveSettings();
+				})
+			)
 	}
 }

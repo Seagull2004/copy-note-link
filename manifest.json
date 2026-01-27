@@ -1,7 +1,7 @@
 {
 	"id": "copy-note-link",
 	"name": "Copy note link",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "Copy into the system clipboard a link to the current note",
 	"author": "Seagull2004",

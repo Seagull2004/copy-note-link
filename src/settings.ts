@@ -1,17 +1,17 @@
 import {App, PluginSettingTab, Setting} from "obsidian";
 import CopyNoteLinkPlugin from "./main";
 
-export interface MyPluginSettings {
+export interface CopyNoteLinkSettings {
 	previewPreference: boolean;
 	headingSupport: boolean;
 }
 
-export const DEFAULT_SETTINGS: MyPluginSettings = {
+export const DEFAULT_SETTINGS: CopyNoteLinkSettings = {
 	previewPreference: false,
 	headingSupport: true
 }
 
-export class SampleSettingTab extends PluginSettingTab {
+export class CopyNoteLinkSettingTab extends PluginSettingTab {
 	plugin: CopyNoteLinkPlugin;
 
 	constructor(app: App, plugin: CopyNoteLinkPlugin) {

@@ -13,7 +13,6 @@ export default class CopyNoteLinkPlugin extends Plugin {
 		this.addCommand({
 			id: 'copy-current-file-link',
 			name: 'Copy current file link',
-			hotkeys: [{ modifiers: ['Mod', 'Shift'], key: 'c' }],
 			callback: async () => {
 				const filePath = this.app.workspace.getActiveFile()?.basename
 				let output = "[[" + filePath

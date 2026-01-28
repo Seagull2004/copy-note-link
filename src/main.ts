@@ -1,10 +1,10 @@
 import {Notice, Plugin} from 'obsidian';
-import {DEFAULT_SETTINGS, MyPluginSettings, SampleSettingTab} from "./settings";
+import {DEFAULT_SETTINGS, CopyNoteLinkSettings, CopyNoteLinkSettingTab} from "./settings";
 
 // Remember to rename these classes and interfaces!
 
 export default class CopyNoteLinkPlugin extends Plugin {
-	settings: MyPluginSettings;
+	settings: CopyNoteLinkSettings;
 
 	async onload() {
 		await this.loadSettings();
@@ -30,14 +30,14 @@ export default class CopyNoteLinkPlugin extends Plugin {
 		});
 	
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new CopyNoteLinkSettingTab(this.app, this));
 	}
 
 	onunload() {
 	}
 
 	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData() as Partial<MyPluginSettings>);
+		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData() as Partial<CopyNoteLinkSettings>);
 	}
 
 	async saveSettings() {
